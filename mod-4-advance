@@ -36,15 +36,18 @@ def relationship_status(from_member, to_member, social_graph):
     
     
 
-    if from_member in social_graph[to_member]['following'] and to_member in social_graph[from_member]['following']:
-        return "friends"
-    elif from_member in social_graph[to_member]['following']:
-        return "followed by"
-    elif from_member in social_graph[to_member]['following']:
-        return "follower"
+    def relationship_status(from_member,to_member,social_graph):    
+
+        if from_member in social_graph[to_member]['following'] and to_member in social_graph[from_member]['following']:
+            return "friends"
+        elif from_member in social_graph[to_member]['following']:
+            return "followed by"
+        elif from_member in social_graph[to_member]['following']:
+            return "follower"
     
-    else:
-        return "no relationship"
+        else:
+            return "no relationship"
+
 
 
 def tic_tac_toe(board):
@@ -69,48 +72,30 @@ def tic_tac_toe(board):
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     
-   
-    
-    
+
+        
 def tic_tac_toe(board):
-    
-        row_results = [board[y] for y in range(len(board))]
-        for x in row_results:
-            if all([item == 'X' for item in x]):
-                return('X')
-            elif all([item == 'O' for item in x]):
-                return('O')
+    outcome = "no winner, play again"
+    flipped = list(zip(*board))[::-1]
+
+    for row_result in board:
+        if (all(symbol == row_result[0] for symbol in row_result)):
+            outcome = row_result[0] 
+
+    for column_result in flipped:
+        if (all(symbol == column_result[0] for symbol in column_result)):
+            outcome = column_result[0] 
+
+    if (all(board[i][i] == board[0][0] for i in range(len(board)))):
+        outcome = board[0][0] 
+
+    if (all(flipped[i][i] == flipped[0][0] for i in range(len(flipped)))):
+        outcome = flipped[0][0] 
+
+    return outcome
 
 
-        column_results = [y for y in zip(*board)]
-        for x in column_results:
-            if all([item == 'X' for item in x]):
-                return('X')
-            elif all([item == 'O' for item in x]):
-                return('O')
-            
 
-
-
-        diagonal_updown = [board[y][y] for y, s in enumerate(board)]
-        if all([item == 'X' for item in diagonal_updown]):
-            return('X')
-    
-        elif all([item == 'O' for item in diagonal_updown]):
-            return('O')
-        
-
-        diagonal_downup = [board[len(board)-1-y][y] for y, s in enumerate(board)]
-        if all([item == 'X' for item in diagonal_downup]):
-            return('X')
-    
-        elif all([item == 'O' for item in diagonal_downup]):
-            return('O')
-
-
-tic_tac_toe(board5)
-   
-        
 
 def eta(first_stop, second_stop, route_map):
     '''ETA. 
@@ -157,6 +142,3 @@ def eta(first_stop, second_stop, route_map):
     
         return newtime
 
-
-    print(eta(legs,"upd","admu"))
-  
